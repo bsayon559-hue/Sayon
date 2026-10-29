@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Personal Website</title>
+
+<style>
+:root {
+    --accent: #00e5ff;
+    --bg: #070b14;
+    --card: #111827;
+    --text: #ffffff;
+    --muted: #b8c3d9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background .35s, color .35s;
+}
+
+body.light {
+    --bg: #f2f6ff;
+    --card: #ffffff;
+    --text: #152039;
+    --muted: #526078;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, input, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible,
+input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+/* Animated background */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .10;
+    filter: blur(90px);
+    animation: float 9s infinite alternate ease-in-out;
+}
+
+.orb.one {
+    top: 10%;
+    left: -100px;
+}
+
+.orb.two {
+    bottom: 5%;
+    right: -100px;
+    animation-delay: -4s;
+}
+
+@keyframes float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(90px, -65px); }
+}
+
+/* Navigation */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 14px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg);
+    border-bottom: 1px solid #64748b33;
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--accent);
+    text-shadow: 0 0 15px var(--accent);
+}
+
+.navlinks {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.navlinks a {
+    font-size: 14px;
+    transition: color .2s;
+}
+
+.navlinks a:hover {
+    color: var(--accent);
+}
+
+.icon-btn {
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--text);
+    padding: 7px 12px;
+    border-radius: 10px;
+}
+
+/* Hero */
+
+.hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.hero-inner {
+    max-width: 780px;
+    animation: appear 1s ease both;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-wrap {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, var(--accent), transparent, var(--accent));
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 12px var(--accent); }
+    50% { box-shadow: 0 0 35px var(--accent); }
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--card);
+}
+
+.hero h1 {
+    font-size: clamp(32px, 7vw, 65px);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.accent {
+    color: var(--accent);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+.typing {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #06101a;
+    font-weight: bold;
+    padding: 11px 23px;
+    border: 0;
+    border-radius: 12px;
+    margin: 5px;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 22px var(--accent);
+}
+
+.btn-outline {
+    color: var(--text);
+    border: 1px solid var(--accent);
+    background: transparent;
+}
+
+/* Sections */
+
+section {
+    padding: 80px 7%;
+    scroll-margin-top: 75px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: clamp(27px, 5vw, 40px);
+    margin-bottom: 35px;
+}
+
+.about {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 18px;
+    background: var(--card);
+    border: 1px solid #64748b44;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px #0002;
+}
+
+.card h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+/* Scroll reveal */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .7s, transform .7s;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Skills */
+
+.skill {
+    margin: 18px 0;
+}
+
+.skill-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.bar {
+    height: 9px;
+    background: #64748b33;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 7px;
+}
+
+.bar span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--accent);
+    border-radius: inherit;
+    transition: width 1.3s ease;
+}
+
+/* Contact */
+
+.contact-box {
+    max-width: 650px;
+    margin: auto;
+}
+
+.contact-box input,
+.contact-box textarea,
+.settings input,
+.settings textarea,
+.settings select {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0;
+    border-radius: 10px;
+    border: 1px solid #64748b66;
+    background: var(--card);
+    color: var(--text);
+}
+
+.contact-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+/* Settings panel */
+
+.settings {
+    position: fixed;
+    top: 0;
+    right: -410px;
+    width: min(390px, 92vw);
+    height: 100dvh;
+    padding: 25px;
+    overflow-y: auto;
+    background: var(--card);
+    border-left: 1px solid var(--accent);
+    z-index: 200;
+    transition: right .35s ease;
+    box-shadow: 0 0 35px #0004;
+}
+
+.settings.open {
+    right: 0;
+}
+
+.settings h2 {
+    margin-bottom: 15px;
+}
+
+.settings label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.settings input[type="color"] {
+    height: 45px;
+    padding: 4px;
+}
+
+.settings input[type="file"] {
+    font-size: 12px;
+}
+
+.settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.close-settings {
+    float: right;
+}
+
+/* Back to top */
+
+#topBtn {
+    position: fixed;
+    right: 18px;
+    bottom: 20px;
+    z-index: 90;
+    display: none;
+    border: 0;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    background: var(--accent);
+    color: #06101a;
+    font-size: 20px;
+}
+
+/* Footer */
+
+footer {
+    padding: 25px;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid #64748b33;
+}
+
+footer span {
+    color: var(--accent);
+}
+
+@media (max-width: 650px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .navlinks {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .navlinks a {
+        font-size: 12px;
+    }
+
+    section {
+        padding: 60px 6%;
+    }
+
+    .profile-wrap {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background" aria-hidden="true">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <a class="logo" href="#home" id="navLogo">MY WORLD</a>
+
+    <div class="navlinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#hobbies">Hobbies</a>
+        <a href="#skills">Skills</a>
+        <a href="#goals">Goals</a>
+        <a href="#contact">Contact</a>
+        <button class="icon-btn" id="themeBtn" type="button"
+                aria-label="Toggle light and dark theme">☀️</button>
+        <button class="icon-btn" id="settingsBtn" type="button">⚙️ Settings</button>
+    </div>
+</nav>
+
+<!-- Home -->
+<header class="hero" id="home">
+    <div class="hero-inner">
+
+        <div class="profile-wrap">
+            <img id="profileImg" class="profile"
+                 alt="Profile photo"
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='80' fill='%2300e5ff'%3E%3F%3C/text%3E%3C/svg%3E">
+        </div>
+
+        <h1>Hello, I'm <span class="accent" id="heroName">Your Name</span></h1>
+
+        <h2 class="typing" id="typingText">Gamer</h2>
+
+        <p id="heroBio">
+            Welcome to my personal website! এখানে আমার সম্পর্কে,
+            আমার শখ, দক্ষতা এবং স্বপ্ন সম্পর্কে জানতে পারবে।
+        </p>
+
+        <a href="#about" class="btn">Explore My World ↓</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+</header>
+
+<!-- About -->
+<section id="about" class="reveal">
+    <h2 class="section-title">About <span class="accent">Me</span></h2>
+    <p class="about" id="aboutText">
+        নমস্কার! আমি নতুন কিছু শিখতে, গেম খেলতে, কোডিং করতে
+        এবং নিজের সৃজনশীল আইডিয়া নিয়ে কাজ করতে ভালোবাসি।
+        আমার লক্ষ্য নিজের দক্ষতা বাড়ানো এবং স্বপ্ন পূরণ করা।
+    </p>
+</section>
+
+<!-- Hobbies -->
+<section id="hobbies" class="reveal">
+    <h2 class="section-title">My <span class="accent">Interests</span></h2>
+
+    <div class="grid">
+        <article class="card">
+            <h3>🎮 Gaming</h3>
+            <p>গেম খেলা, নতুন কৌশল শেখা এবং Gaming Map তৈরি করা।</p>
+        </article>
+
+        <article class="card">
+            <h3>💻 Coding</h3>
+            <p>HTML, CSS ও JavaScript দিয়ে নতুন কিছু তৈরি করা।</p>
+        </article>
+
+        <article class="card">
+            <h3>🎬 YouTube</h3>
+            <p>ভিডিওর আইডিয়া তৈরি করা এবং নিজের কনটেন্ট বানানো।</p>
+        </article>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="reveal">
+    <h2 class="section-title">My <span class="accent">Skills</span></h2>
+
+    <div class="grid">
+        <article class="card">
+            <h3>My Progress</h3>
+
+            <div class="skill">
+                <div class="skill-label">
+                    <span>HTML</span><span>70%</span>
+                </div>
+                <div class="bar"><span data-level="70"></span></div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-label">
+                    <span>CSS</span><span>50%</span>
+                </div>
+                <div class="bar"><span data-level="50"></span></div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-label">
+                    <span>JavaScript</span><span>30%</span>
+                </div>
+                <div class="bar"><span data-level="30"></span></div>
+            </div>
+
+            <p class="note">এগুলি নমুনা মাত্র। Settings থেকে পরিবর্তন করতে পারবে।</p>
+        </article>
+    </div>
+</section>
+
+<!-- Goals -->
+<section id="goals" class="reveal">
+    <h2 class="section-title">My <span class="accent">Goals</span></h2>
+
+    <div class="grid">
+        <article class="card">
+            <h3>🚀 Learn More</h3>
+            <p>প্রতিদিন নতুন কিছু শেখা এবং নিজের জ্ঞান বাড়ানো।</p>
+        </article>
+
+        <article class="card">
+            <h3>🌟 Be Creative</h3>
+            <p>নিজের আইডিয়া দিয়ে নতুন কিছু তৈরি করা।</p>
+        </article>
+
+        <article class="card">
+            <h3>🏆 Achieve Dreams</h3>
+            <p>পরিশ্রম করে নিজের লক্ষ্য পূরণ করা।</p>
+        </article>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="reveal">
+    <h2 class="section-title">Contact <span class="accent">Me</span></h2>
+
+    <div class="contact-box">
+        <p class="about">আমাকে মেসেজ পাঠাতে নিচের ফর্মটি ব্যবহার করো।</p>
+
+        <form id="contactForm">
+            <input id="senderName" type="text"
+                   placeholder="Your Name" required maxlength="80">
+
+            <input id="senderEmail" type="email"
+                   placeholder="Your Email" required maxlength="150">
+
+            <textarea id="senderMessage"
+                      placeholder="Write your message..."
+                      required maxlength="3000"></textarea>
+
+            <button class="btn" type="submit">Open Email App ✉️</button>
+        </form>
+
+        <p class="note" id="contactStatus" aria-live="polite">
+            নোট: এই ফর্মটি তোমার ডিভাইসের Email App খুলবে।
+            এটি নিজে থেকে মেসেজ সার্ভারে পাঠায় না।
+        </p>
+    </div>
+</section>
+
+<footer>
+    <p>© <span id="year"></span> <span id="footerName">Your Name</span>.
+       Made with ❤️</p>
+</footer>
+
+<button id="topBtn" type="button" aria-label="Back to top">↑</button>
+
+<!-- Settings panel -->
+<aside class="settings" id="settingsPanel"
+       aria-label="Website settings" aria-hidden="true">
+
+    <button class="icon-btn close-settings" id="closeSettings"
+            type="button" aria-label="Close settings">✕</button>
+
+    <h2>⚙️ Customize Website</h2>
+    <p class="note">পরিবর্তনগুলি Preview করো, তারপর Save চাপো।</p>
+
+    <form id="settingsForm">
+
+        <label for="nameInput">তোমার নাম</label>
+        <input id="nameInput" type="text" maxlength="60"
+               placeholder="Your Name">
+
+        <label for="logoInput">Website Logo Text</label>
+        <input id="logoInput" type="text" maxlength="30"
+               placeholder="MY WORLD">
+
+        <label for="roleInput">তোমার পরিচয় / Roles</label>
+        <input id="roleInput" type="text" maxlength="150"
+               placeholder="Gamer, Coder, Creator">
+
+        <label for="bioInput">Home Description</label>
+        <textarea id="bioInput" rows="3" maxlength="500"
+                  placeholder="Write about yourself"></textarea>
+
+        <label for="aboutInput">About Me</label>
+        <textarea id="aboutInput" rows="4" maxlength="1500"
+                  placeholder="Your story"></textarea>
+
+        <label for="colorInput">Theme Color</label>
+        <input id="colorInput" type="color" value="#00e5ff">
+
+        <label for="photoInput">Profile Photo</label>
+        <input id="photoInput" type="file" accept="image/*">
+        <p class="note">ছবি শুধু এই ওয়েবসাইটের Preview ও ব্রাউজারে ব্যবহৃত হবে।</p>
+
+        <label for="htmlInput">HTML Skill %</label>
+        <input id="htmlInput" type="number" min="0" max="100" value="70">
+
+        <label for="cssInput">CSS Skill %</label>
+        <input id="cssInput" type="number" min="0" max="100" value="50">
+
+        <label for="jsInput">JavaScript Skill %</label>
+        <input id="jsInput" type="number" min="0" max="100" value="30">
+
+        <label for="emailInput">Contact Email</label>
+        <input id="emailInput" type="email" maxlength="150"
+               placeholder="your-email@example.com">
+
+        <div class="settings-actions">
+            <button class="btn" type="submit">💾 Save</button>
+            <button class="btn btn-outline" id="previewBtn"
+                    type="button">Preview</button>
+            <button class="btn btn-outline" id="resetBtn"
+                    type="button">Reset</button>
+        </div>
+
+        <p class="note" id="settingsStatus" aria-live="polite"></p>
+    </form>
+</aside>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const defaultData = {
+    name: "Your Name",
+    logo: "MY WORLD",
+    roles: "Gamer, Coder, Creator",
+    bio: "Welcome to my personal website! এখানে আমার সম্পর্কে, আমার শখ, দক্ষতা এবং স্বপ্ন সম্পর্কে জানতে পারবে।",
+    about: "নমস্কার! আমি নতুন কিছু শিখতে, গেম খেলতে, কোডিং করতে এবং নিজের সৃজনশীল আইডিয়া নিয়ে কাজ করতে ভালোবাসি। আমার লক্ষ্য নিজের দক্ষতা বাড়ানো এবং স্বপ্ন পূরণ করা।",
+    color: "#00e5ff",
+    theme: "dark",
+    html: 70,
+    css: 50,
+    js: 30,
+    email: "",
+    photo: ""
+};
+
+let data = { ...defaultData };
+let roleTimer = null;
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+let roleGeneration = 0;
+
+/* Load saved settings */
+
+function loadData() {
+    try {
+        const saved = localStorage.getItem("myPersonalWebsite");
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            data = { ...defaultData, ...parsed };
+        }
+    } catch (error) {
+        console.warn("Saved settings could not be loaded.");
+    }
+
+    if (!/^#[0-9a-f]{6}$/i.test(data.color)) {
+        data.color = defaultData.color;
+    }
+
+    if (!["dark", "light"].includes(data.theme)) {
+        data.theme = "dark";
+    }
+
+    ["html", "css", "js"].forEach(key => {
+        const value = Number(data[key]);
+        data[key] = Number.isFinite(value)
+            ? Math.max(0, Math.min(100, value))
+            : defaultData[key];
+    });
+
+    if (typeof data.photo !== "string" ||
+        !data.photo.startsWith("data:image/") ||
+        data.photo.length > 3_000_000) {
+        data.photo = "";
+    }
+}
+
+/* Apply customization */
+
+function applyData() {
+    document.documentElement.style.setProperty("--accent", data.color);
+
+    document.body.classList.toggle("light", data.theme === "light");
+
+    $("heroName").textContent = data.name;
+    $("footerName").textContent = data.name;
+    $("navLogo").textContent = data.logo;
+    $("heroBio").textContent = data.bio;
+    $("aboutText").textContent = data.about;
+    $("profileImg").src = data.photo || defaultData.photo;
+    $("themeBtn").textContent = data.theme === "dark" ? "☀️" : "🌙";
+    $("year").textContent = new Date().getFullYear();
+
+    $("nameInput").value = data.name;
+    $("logoInput").value = data.logo;
+    $("roleInput").value = data.roles;
+    $("bioInput").value = data.bio;
+    $("aboutInput").value = data.about;
+    $("colorInput").value = data.color;
+    $("htmlInput").value = data.html;
+    $("cssInput").value = data.css;
+    $("jsInput").value = data.js;
+    $("emailInput").value = data.email;
+
+    updateSkills();
+    startTyping();
+}
+
+function saveData() {
+    try {
+        localStorage.setItem("myPersonalWebsite", JSON.stringify(data));
+        $("settingsStatus").textContent = "✅ Saved successfully!";
+        return true;
+    } catch (error) {
+        $("settingsStatus").textContent =
+            "⚠️ Save করা যায়নি। ছবিটি ছোট করে আবার চেষ্টা করো।";
+        return false;
+    }
+}
+
+/* Typing animation */
+
+function startTyping() {
+    roleGeneration++;
+    const generation = roleGeneration;
+
+    clearTimeout(roleTimer);
+
+    const roles = data.roles.split(",")
+        .map(role => role.trim())
+        .filter(Boolean);
+
+    const list = roles.length ? roles : ["Welcome"];
+
+    roleIndex = 0;
+    charIndex = 0;
+    deleting = false;
+
+    $("typingText").textContent = "";
+
+    function tick() {
+        if (generation !== roleGeneration) return;
+
+        const word = list[roleIndex % list.length];
+
+        if (!deleting) {
+            charIndex++;
+            $("typingText").textContent = word.slice(0, charIndex);
+
+            if (charIndex >= word.length) {
+                deleting = true;
+                roleTimer = setTimeout(tick, 1200);
+                return;
+            }
+
+            roleTimer = setTimeout(tick, 100);
+        } else {
+            charIndex--;
+            $("typingText").textContent = word.slice(0, charIndex);
+
+            if (charIndex <= 0) {
+                deleting = false;
+                roleIndex = (roleIndex + 1) % list.length;
+                roleTimer = setTimeout(tick, 300);
+                return;
+            }
+
+            roleTimer = setTimeout(tick, 45);
+        }
+    }
+
+    tick();
+}
+
+/* Skill animations */
+
+function updateSkills() {
+    document.querySelectorAll(".bar span").forEach((bar, index) => {
+        const key = ["html", "css", "js"][index];
+        const value = Math.max(0, Math.min(100, Number(data[key]) || 0));
+
+        bar.dataset.level = value;
+        bar.parentElement.previousElementSibling.lastElementChild.textContent =
+            value + "%";
+
+        bar.style.width = "0%";
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                bar.style.width = value + "%";
+            });
+        });
+    });
+}
+
+/* Settings panel */
+
+function openSettings() {
+    $("settingsPanel").classList.add("open");
+    $("settingsPanel").setAttribute("aria-hidden", "false");
+    $("settingsBtn").setAttribute("aria-expanded", "true");
+    $("closeSettings").focus();
+}
+
+function closeSettings() {
+    $("settingsPanel").classList.remove("open");
+    $("settingsPanel").setAttribute("aria-hidden", "true");
+    $("settingsBtn").setAttribute("aria-expanded", "false");
+    $("settingsBtn").focus();
+}
+
+$("settingsBtn").addEventListener("click", openSettings);
+$("closeSettings").addEventListener("click", closeSettings);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" &&
+        $("settingsPanel").classList.contains("open")) {
+        closeSettings();
+    }
+});
+
+/* Preview settings before saving */
+
+function readForm() {
+    return {
+        name: $("nameInput").value.trim() || "Your Name",
+        logo: $("logoInput").value.trim() || "MY WORLD",
+        roles: $("roleInput").value.trim() || "Welcome",
+        bio: $("bioInput").value.trim() || "Welcome to my website!",
+        about: $("aboutInput").value.trim() || "About me",
+        color: $("colorInput").value,
+        theme: data.theme,
+        html: Math.max(0, Math.min(100, Number($("htmlInput").value) || 0)),
+        css: Math.max(0, Math.min(100, Number($("cssInput").value) || 0)),
+        js: Math.max(0, Math.min(100, Number($("jsInput").value) || 0)),
+        email: $("emailInput").value.trim(),
+        photo: data.photo
+    };
+}
+
+$("previewBtn").addEventListener("click", () => {
+    data = readForm();
+    applyData();
+    $("settingsStatus").textContent =
+        "👀 Preview দেখানো হয়েছে। স্থায়ী করতে Save চাপো।";
+});
+
+$("settingsForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const newData = readForm();
+
+    if (newData.email &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newData.email)) {
+        $("settingsStatus").textContent = "⚠️ সঠিক Email Address দাও।";
+        return;
+    }
+
+    data = newData;
+    applyData();
+
+    if (saveData()) {
+        closeSettings();
+    }
+});
+
+/* Profile photo upload */
+
+$("photoInput").addEventListener("change", event => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+        $("settingsStatus").textContent = "⚠️ একটি Image File বেছে নাও।";
+        return;
+    }
+
+    if (file.size > 1_500_000) {
+        $("settingsStatus").textContent =
+            "⚠️ 1.5 MB-এর চেয়ে ছোট ছবি বেছে নাও।";
+        event.target.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        const image = new Image();
+
+        image.onload = () => {
+            const canvas = document.createElement("canvas");
+            const maxSize = 400;
+
+            const scale = Math.min(
+                1,
+                maxSize / Math.max(image.width, image.height)
+            );
+
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+            data.photo = canvas.toDataURL("image/jpeg", 0.78);
+            $("profileImg").src = data.photo;
+
+            $("settingsStatus").textContent =
+                "📷 ছবি Preview হয়েছে। স্থায়ী করতে Save চাপো।";
+        };
+
+        image.onerror = () => {
+            $("settingsStatus").textContent = "⚠️ ছবিটি পড়া যায়নি।";
+        };
+
+        image.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+});
+
+/* Theme toggle */
+
+$("themeBtn").addEventListener("click", () => {
+    data.theme = data.theme === "dark" ? "light" : "dark";
+    applyData();
+    saveData();
+});
+
+/* Reset settings */
+
+$("resetBtn").addEventListener("click", () => {
+    if (!confirm("সব customization reset করতে চাও?")) return;
+
+    data = { ...defaultData };
+    applyData();
+    saveData();
+
+    $("photoInput").value = "";
+    $("settingsStatus").textContent = "🔄 Default settings restored.";
+});
+
+/* Reveal elements on scroll */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(element => observer.observe(element));
+} else {
+    revealElements.forEach(element => element.classList.add("visible"));
+}
+
+/* Back-to-top button */
+
+window.addEventListener("scroll", () => {
+    $("topBtn").style.display = window.scrollY > 300 ? "block" : "none";
+}, { passive: true });
+
+$("topBtn").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* Contact form */
+
+$("contactForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const name = $("senderName").value.trim();
+    const email = $("senderEmail").value.trim();
+    const message = $("senderMessage").value.trim();
+
+    if (!name || !email || !message) return;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        $("contactStatus").textContent =
+            "⚠️ সঠিক Email Address লিখো।";
+        return;
+    }
+
+    if (!data.email) {
+        $("contactStatus").textContent =
+            "⚠️ আগে Settings-এ Contact Email সেট করো।";
+        openSettings();
+        return;
+    }
+
+    const subject = encodeURIComponent("Website message from " + name);
+    const body = encodeURIComponent(
+        "Name: " + name +
+        "\nEmail: " + email +
+        "\n\nMessage:\n" + message
+    );
+
+    $("contactStatus").textContent =
+        "তোমার Email App খোলার চেষ্টা করা হচ্ছে।";
+
+    window.location.href =
+        "mailto:" + encodeURIComponent(data.email) +
+        "?subject=" + subject + "&body=" + body;
+});
+
+/* Start website */
+
+loadData();
+applyData();
+
+</script>
+
+</body>
+  </html>
